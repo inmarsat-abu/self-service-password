@@ -295,6 +295,10 @@ $recaptcha_request_method = null;
 # sendsms
 $default_action = "change";
 
+# Password change mode
+# Use exop_passwd instead of mod_replace to enable changing expired passwords
+$use_exop_mode = false;
+
 ## Extra messages
 # They can also be defined in lang/ files
 #$messages['passwordchangedextramessage'] = NULL;

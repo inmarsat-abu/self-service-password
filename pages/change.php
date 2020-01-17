@@ -129,7 +129,7 @@ if ( $result === "" ) {
 
     # Bind with old password
     $bind = ldap_bind($ldap, $userdn, $oldpassword);
-    if ( !$bind ) {
+    if ( !$bind  && !$use_exop_mode ) {
         $result = "badcredentials";
         $errno = ldap_errno($ldap);
         if ( $errno ) {
@@ -173,7 +173,7 @@ if ( $result === "" ) {
 # Change password
 #==============================================================================
 if ( $result === "" ) {
-    $result = change_password($ldap, $userdn, $newpassword, $ad_mode, $ad_options, $samba_mode, $samba_options, $shadow_options, $hash, $hash_options, $who_change_password, $oldpassword);
+    $result = change_password($ldap, $userdn, $newpassword, $ad_mode, $ad_options, $samba_mode, $samba_options, $shadow_options, $hash, $hash_options, $who_change_password, $oldpassword, $use_exop_mode );
     if ( $result === "passwordchanged" && isset($posthook) ) {
         $command = posthook_command($posthook, $login, $newpassword, $oldpassword, $posthook_password_encodebase64);
         exec($command, $posthook_output, $posthook_return);
